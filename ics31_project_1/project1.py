@@ -61,7 +61,15 @@ def chatbot(version):
     user_input = ""
     print("Welcome!")
     if version == 0:
-        user_input = input("Ask me anything. When you're done, just type \'bye\'")
+        user_input = input("Ask me anything. When you're done, just type \'bye\'\n - ")
+        while user_input != "bye":
+            if is_question(user_input):
+                if user_input in get_first_quotes(project1_quotes.get_quotes()):
+                    user_input = input(f"{respond(project1_quotes.get_quotes(), user_input)}\n - ")
+                else:
+                    user_input = input("I don't know.\n - ")
+            else:
+                user_input= input("I only respond to questions!\n - ")
 chatbot(0)
 
 
