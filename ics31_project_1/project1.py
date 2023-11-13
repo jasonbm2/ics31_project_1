@@ -149,7 +149,7 @@ def chatbot(version):
             else:
                 user_input= input("I only respond to questions!\n - ").lower()
     if version == 1:
-        THRESH = 0.25
+        THRESH = 0.6
         close_enough = False
         while user_input != "bye":
             if is_question(user_input):
@@ -215,8 +215,17 @@ def chatbot(version):
                         user_input = input("I don't know.\n - ").lower()
             else:
                 user_input= input("I only respond to questions!\n - ").lower()
+'''
+Takes in input and displays output, text on the screen. Our main chatbot function. It accepts questions and outputs a random movie quotes corresponding to the question. This bot has failsafes
+if the input is not a question or if it has no corresponding quote in response to the question. Version 0, 1, and 2 become increasingly more lenient in question wording
+Args:
+version: (int) either 0, 1, or 2, to determine which version of the chatbot is being used
+
+Returns:
+nothing. prints out prompts and quotes in response to user input
+'''
 
 if __name__ == '__main__':
-    chatbot(1)
+    chatbot(0)
 
 
