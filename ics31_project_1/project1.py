@@ -1,19 +1,35 @@
-#Jason Martin, Project 1
-
+#Jason Martin, ICS 31, Project 1, 11/12/23
 
 from project1_quotes import *
 from random import *
-h = get_quotes()
 # ------------------------------------------------------------
 # Movie Quotes Analysis Section
-def is_question(user_string):
+def is_question(user_string): #Checks if the user's string ends in a question mark
     return user_string[-1] == "?"
+'''
+Checks if the user's string ends in a question mark
+Args:
+user_string: (string) input from the user
+
+Returns: 
+returns boolean
+returns boolean True if the string ends in a question mark and False if it doesn't end in a question mark
+'''
 
 def get_first_quotes(list_of_quotes):
     first_quotes = []
     for i in list_of_quotes:
         first_quotes.append(i[0])
     return(first_quotes)
+'''
+Sequences through a list of tuples that each contain a pair of quotes and makes a list of only the first quotes in each pair
+Args:
+list_of_quotes: (list) a list of tuples each containing a pair of strings. the list is derived from project1_quotes.py
+
+Returns: 
+returns list
+returns list of strings, the first quotes from the list of tuples
+'''
 
 def get_first_questions(list_of_quotes):
     first_questions = []
@@ -21,6 +37,15 @@ def get_first_questions(list_of_quotes):
         if is_question(i[0]):
             first_questions.append(i[0])
     return first_questions
+'''
+Sequences through a list of tuples that each contain a pair of quotes and makes a list of only the first quotes that end in a question mark in each pair
+Args:
+list_of_quotes: (list) a list of tuples each containing a pair of strings. the list is derived from project1_quotes.py
+
+Returns: 
+returns list
+returns list of strings, the first quotes that end in question marks from the list of tuples
+'''
 
 def count_question_quotes(list_of_quotes):
     question_counter = 0
@@ -29,6 +54,15 @@ def count_question_quotes(list_of_quotes):
         question_counter += 1
     return question_counter
 #71117 questions
+'''
+Sequences through a list of tuples that each contain a pair of quotes and returns a counter of the amount of questions that appear among the first quotes in the quote pairs
+Args:
+list_of_quotes: (list) a list of tuples each containing a pair of strings. the list is derived from project1_quotes.py
+
+Returns: 
+returns int
+returns an int that increments each time the first quote in each pair of quotes ends in a question mark
+'''
 
 def get_average_question_length(list_of_quotes):
     avg_length_of_first_question = 0.0
@@ -39,6 +73,17 @@ def get_average_question_length(list_of_quotes):
         avg_length_of_first_question += quote_length
     avg_length_of_first_question /= len(list_of_quote_lengths)
     return avg_length_of_first_question
+'''
+Sequences through a list of tuples that each contain a pair of quotes and finds the average length of the first quotes in each pair of quotes that ends in a question mark
+Args:
+list_of_quotes: (list) a list of tuples each containing a pair of strings. the list is derived from project1_quotes.py
+
+Returns: 
+returns float
+returns a float that is the average length of all the first quotes that end in question marks
+'''
+
+
 
 # ------------------------------------------------------------
 # Chatbot Section
@@ -48,14 +93,47 @@ def get_responses(list_of_quotes, input_question):
         if is_question(input_question) and input_question == quotes[0]:
             corresponding_responses.append(quotes[1])
     return corresponding_responses
+'''
+Retrieves the responese or responeses, the second quote in each pair of quotes, that correspond to an inputted question
+Args:
+list_of_quotes: (list) a list of tuples each containing a pair of strings. the list is derived from project1_quotes.py
+input_question: (string) input from the user
+
+Returns: 
+returns list
+returns list of strings, the second quotes from the list of tuples that correspond to the inputted question
+'''
 
 def get_random_from_list(input_list):
     random_element = input_list[randrange(len(input_list))]
     return random_element
+'''
+Generates and returns a random response from an curated list
+Args:
+input_list: (list) a list of strings curated to be only responses to an inputted question
+
+Returns: 
+returns string
+returns a string from a list of curated and inputted strings that is supposed to be a response to some inputted question
+'''
 
 def respond(list_of_quotes, input_question):
-    if is_question(input_question):
-        return get_random_from_list(get_responses(list_of_quotes, input_question))
+    list_of_responses = get_responses(list_of_quotes, input_question)
+    if list_of_responses == []:
+        return("I don't know.")
+    else:
+        random = get_random_from_list(list_of_responses)
+        return(random)
+'''
+Returns a response, either a single, random, response to an inputted question, or returns the string "I don't know."
+Args:
+list_of_quotes: (list) a list of tuples each containing a pair of strings. the list is derived from project1_quotes.py
+input_question: (string) input from the user
+
+Returns: 
+returns list or string
+returns the list of responeses, the second quotes from the list of tuples that correspond to the inputted question, if they exist. If not, returns the string "I don't know."
+'''
 
 def chatbot(version):
     user_input = ""
